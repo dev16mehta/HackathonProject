@@ -6,7 +6,7 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors()); // Enable CORS for cross-origin requests
+app.use(cors()); // Enable CORS for the cross-origin requests
 app.use(express.json()); // Parse incoming JSON requests
 
 // Load environment variables
