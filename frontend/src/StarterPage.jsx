@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./App.css";
+import './StarterPage.css';  // Importing external CSS
 
 const StarterPage = () => {
   const navigate = useNavigate();
@@ -19,13 +19,13 @@ const StarterPage = () => {
   };
 
   return (
-    <div className="container" style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100vh" }}>
-      <div style={{ textAlign: "center" }}>
-        <h1>AppName</h1>
+    <div className="container">
+      <div className="content">
+        <h1>ITS UHHH CARBON EMISSIONS TRACKER THING</h1>
         {!showOptions ? (
-          <button onClick={handleStartClick} style={{ margin: "20px 0" }}>Start</button>
+          <button onClick={handleStartClick} className="start-button">Start</button>
         ) : (
-          <div className="user-options" style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+          <div className="user-options">
             <button onClick={() => handleSelection("new")}>New User</button>
             <button onClick={() => handleSelection("existing")}>Existing User</button>
           </div>
