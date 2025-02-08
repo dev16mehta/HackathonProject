@@ -39,7 +39,7 @@ const CarbonFootprintTracker = () => {
   };
 
   return (
-    <div className="container">
+    <div className="tracker-container">
       <h1>🌍 Virtual Carbon Footprint Tracker</h1>
       <p>Calculate your daily carbon footprint & get eco-friendly tips!</p>
 

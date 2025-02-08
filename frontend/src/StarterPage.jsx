@@ -19,9 +19,9 @@ const StarterPage = () => {
   };
 
   return (
-    <div className="container">
-      <div className="content">
-        <h1>ITS UHHH CARBON EMISSIONS TRACKER THING</h1>
+    <div className="starter-container">
+      <div className="starter-content">
+        <h1>WE. DO. CHANGE.</h1>
         {!showOptions ? (
           <button onClick={handleStartClick} className="start-button">Start</button>
         ) : (
