@@ -1,89 +1,95 @@
-import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Switch } from "@/components/ui/switch";
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from "recharts";
+import React, { useState } from "react";
 
-const CarbonEmissionsTracker = () => {
-  const [entries, setEntries] = useState([]);
-  const [activity, setActivity] = useState("");
-  const [emission, setEmission] = useState("");
-  const [isPublicTransport, setIsPublicTransport] = useState(false);
+const CarbonFootprintTracker = () => {
+  const [answers, setAnswers] = useState({
+    transport: "",
+    diet: "",
+    energy: "",
+    shopping: "",
+  });
+  const [result, setResult] = useState(null);
+  const [badge, setBadge] = useState("");
 
-  const handleAddEntry = () => {
-    if (!activity || !emission || isNaN(Number(emission))) return;
-    const newEntry = { activity, emission: parseFloat(emission) };
-    setEntries([...entries, newEntry]);
-    setActivity("");
-    setEmission("");
+  // Predefined carbon footprint values (example)
+  const carbonData = {
+    transport: { car: 10, public_transport: 5, bike: 1, walk: 0 },
+    diet: { meat: 8, vegetarian: 5, vegan: 3 },
+    energy: 2, // CO2 per hour
+    shopping: { fast: 6, sustainable: 2 },
   };
 
-  const totalEmissions = entries.reduce((acc, entry) => acc + entry.emission, 0);
+  const handleChange = (e) => {
+    setAnswers({ ...answers, [e.target.name]: e.target.value });
+  };
+
+  const calculateFootprint = () => {
+    let totalCO2 =
+      (carbonData.transport[answers.transport] || 0) +
+      (carbonData.diet[answers.diet] || 0) +
+      (answers.energy ? parseInt(answers.energy) * carbonData.energy : 0) +
+      (carbonData.shopping[answers.shopping] || 0);
+
+    // Set gamification badge
+    if (totalCO2 < 10) setBadge("🌱 Eco Warrior");
+    else if (totalCO2 < 20) setBadge("♻️ Sustainability Starter");
+    else setBadge("🌍 Can Improve");
+
+    setResult(totalCO2);
+  };
 
   return (
-    <div className="p-6 max-w-2xl mx-auto space-y-6 bg-green-50 rounded-2xl shadow-xl">
-      <h1 className="text-4xl font-bold text-green-800 text-center">Carbon Emissions Tracker</h1>
+    <div className="container">
+      <h1>🌍 Virtual Carbon Footprint Tracker</h1>
+      <p>Calculate your daily carbon footprint & get eco-friendly tips!</p>
 
-      <Card className="rounded-xl bg-white shadow-md">
-        <CardContent className="space-y-4">
-          <h2 className="text-xl font-semibold text-green-700">Daily Commute Activity</h2>
-          <div className="space-y-2">
-            <div className="flex items-center space-x-4">
-              <span>Use Public Transport:</span>
-              <Switch
-                checked={isPublicTransport}
-                onCheckedChange={setIsPublicTransport}
-              />
-            </div>
-          </div>
-          <div className="flex space-x-2">
-            <Input
-              type="text"
-              placeholder="Activity (e.g., Driving)"
-              value={activity}
-              onChange={(e) => setActivity(e.target.value)}
-              className="w-1/2"
-            />
-            <Input
-              type="number"
-              placeholder="Emissions (kg CO2)"
-              value={emission}
-              onChange={(e) => setEmission(e.target.value)}
-              className="w-1/2"
-            />
-            <Button onClick={handleAddEntry} className="bg-green-600 hover:bg-green-700 text-white">
-              Add Entry
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+      {!result ? (
+        <div className="form">
+          <label>How do you commute daily?</label>
+          <select name="transport" onChange={handleChange}>
+            <option value="">Select...</option>
+            <option value="car">Car</option>
+            <option value="public_transport">Public Transport</option>
+            <option value="bike">Bike</option>
+            <option value="walk">Walk</option>
+          </select>
 
-      <Card className="rounded-xl bg-white shadow-md">
-        <CardContent>
-          <h2 className="text-xl font-semibold text-green-700">Summary</h2>
-          <p className="text-lg">Total Emissions: {totalEmissions.toFixed(2)} kg CO2</p>
-        </CardContent>
-      </Card>
+          <label>What’s your diet?</label>
+          <select name="diet" onChange={handleChange}>
+            <option value="">Select...</option>
+            <option value="meat">Meat</option>
+            <option value="vegetarian">Vegetarian</option>
+            <option value="vegan">Vegan</option>
+          </select>
 
-      <Card className="rounded-xl bg-white shadow-md">
-        <CardContent>
-          <h2 className="text-xl font-semibold text-green-700">Emission Chart</h2>
-          {entries.length > 0 ? (
-            <LineChart width={500} height={300} data={entries} className="mx-auto">
-              <Line type="monotone" dataKey="emission" stroke="#82ca9d" />
-              <CartesianGrid stroke="#ccc" />
-              <XAxis dataKey="activity" />
-              <YAxis />
-              <Tooltip />
-            </LineChart>
-          ) : (
-            <p className="text-center">No data to display</p>
-          )}
-        </CardContent>
-      </Card>
+          <label>How many hours do you use electronic devices daily?</label>
+          <input type="number" name="energy" onChange={handleChange} />
+
+          <label>Do you buy sustainable or fast fashion?</label>
+          <select name="shopping" onChange={handleChange}>
+            <option value="">Select...</option>
+            <option value="fast">Fast Fashion</option>
+            <option value="sustainable">Sustainable</option>
+          </select>
+
+          <button onClick={calculateFootprint}>Calculate Footprint</button>
+        </div>
+      ) : (
+        <div className="results">
+          <h2>Your Estimated Carbon Footprint: {result} kg CO₂</h2>
+          <p>🌿 Suggested Actions:</p>
+          <ul>
+            {answers.transport === "car" && <li>Switch to public transport to save CO₂.</li>}
+            {answers.diet === "meat" && <li>Try a plant-based meal once a week.</li>}
+            {answers.shopping === "fast" && <li>Choose sustainable brands for a lower footprint.</li>}
+          </ul>
+          <p className="badge">🎖 {badge}</p>
+          <p className="verdn">🌱 Thanks to your eco-friendly choices, you've helped plant 1 tree! (Mock Verdn API)</p>
+
+          <button onClick={() => setResult(null)}>Recalculate</button>
+        </div>
+      )}
     </div>
   );
 };
 
-export default CarbonEmissionsTracker;
+export default CarbonFootprintTracker;
