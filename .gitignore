@@ -133,3 +133,8 @@ npm-debug.log*
 
 # macOS System Files
 .DS_Store
+
+# Ignore package-lock.json, package.json, and server.js
+package-lock.json
+package.json
+server.js
