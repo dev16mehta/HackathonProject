@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import './App.css'
+import './CarbonFootprintTracker.css'
 
 const CarbonFootprintTracker = () => {
   const [answers, setAnswers] = useState({
