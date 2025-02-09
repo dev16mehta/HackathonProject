@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./App.css"; // Import styles
+import "./App.css";
+import TreeImage from "./assets/Tree2.png"; // Correct tree image path
+import ClimateChangeImage from "./assets/climatechange.png"; // Import the climate change image
 
 const StarterPage = () => {
   const navigate = useNavigate();
@@ -20,7 +22,12 @@ const StarterPage = () => {
 
   return (
     <div className="starter-layout">
-      {/* Left side: Starter Page content (40%) */}
+      {/* Climate Change Image */}
+      <div className="climate-image-container">
+        <img src={ClimateChangeImage} alt="Climate Change" className="climate-image" />
+      </div>
+
+      {/* Starter Content */}
       <div className="starter-container">
         <h1>CarbonTrack</h1>
         {!showOptions ? (
@@ -33,8 +40,10 @@ const StarterPage = () => {
         )}
       </div>
 
-      {/* Right side: Blank space (60%) */}
-      <div className="blank-space"></div>
+      {/* Tree Image */}
+      <div className="tree-container">
+        <img src={TreeImage} alt="Tree" className="tree-image" />
+      </div>
     </div>
   );
 };
