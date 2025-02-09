@@ -1,36 +1,40 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import './StarterPage.css';  // Importing external CSS
+import "./App.css"; // Import styles
 
 const StarterPage = () => {
   const navigate = useNavigate();
   const [showOptions, setShowOptions] = useState(false);
 
   const handleStartClick = () => {
-    setShowOptions(true); // Show the New User & Existing User buttons
+    setShowOptions(true);
   };
 
   const handleSelection = (type) => {
     if (type === "new") {
-      navigate("/tracker"); // Redirect to the Carbon Footprint Tracker
+      navigate("/tracker");
     } else if (type === "existing") {
-      navigate("/intro"); // Redirect to an intro/register page
+      navigate("/intro");
     }
   };
 
   return (
-    <div className="starter-container">
-      <div className="starter-content">
-        <h1>WE. DO. CHANGE.</h1>
+    <div className="starter-layout">
+      {/* Left side: Starter Page content (40%) */}
+      <div className="starter-container">
+        <h1>CarbonTrack</h1>
         {!showOptions ? (
-          <button onClick={handleStartClick} className="start-button">Start</button>
+          <button onClick={handleStartClick} className="start-btn">Start</button>
         ) : (
           <div className="user-options">
-            <button onClick={() => handleSelection("new")}>New User</button>
-            <button onClick={() => handleSelection("existing")}>Existing User</button>
+            <button onClick={() => handleSelection("new")} className="user-btn">New User</button>
+            <button onClick={() => handleSelection("existing")} className="user-btn">Existing User</button>
           </div>
         )}
       </div>
+
+      {/* Right side: Blank space (60%) */}
+      <div className="blank-space"></div>
     </div>
   );
 };
