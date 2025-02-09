@@ -1,53 +1,62 @@
-/* Registration Page Layout /
+/* Registration Page Layout */
 .registration-page {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: radial-gradient(circle, rgba(20, 20, 40, 0.8) 10%, black 90%);
+  height: 100vh; /* Full height */
+  width: 100vw; /* Full width */
+  display: flex; /* Center content */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  background: radial-gradient(circle, rgba(20, 20, 40, 0.8) 10%, black 90%); /* Radial gradient background */
 }
 
-/ Registration Form */
+/* Registration Form */
 .registration-form {
-    background-color: #f9f9f9;
-    border-radius: 12px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-    padding: 40px;
-    width: 100%;
-    max-width: 400px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .registration-form h1 {
-    font-size: 32px;
-    text-align: center;
-    color: #4caf50;
-  }
-  
-  .registration-form label {
-    font-size: 16px;
-    color: #333;
-  }
-  
-  .registration-form input {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-  }
-  
-  .registration-form button {
-    background-color: #4caf50;
-    color: white;
-    padding: 12px;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  .registration-form button:hover {
-    background-color: #45a049;
-  }
+  background-color: #f9f9f9; /* White background */
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  padding: 60px 50px; /* Larger padding for spacing */
+  width: 100%; /* Full width within max-width */
+  max-width: 600px; /* Make the white section wider */
+  height: auto; /* Dynamic height based on content */
+  min-height: 500px; /* Ensure a minimum height */
+  display: flex; /* Flexbox layout */
+  flex-direction: column; /* Stack elements vertically */
+  gap: 25px; /* Increase spacing between elements */
+}
+
+/* Title */
+.registration-form h1 {
+  font-size: 36px; /* Larger title */
+  text-align: center;
+  color: #4caf50;
+  margin-bottom: 20px; /* Space below the title */
+}
+
+/* Labels */
+.registration-form label {
+  font-size: 16px;
+  color: #333;
+  text-align: left; /* Align labels to the left */
+}
+
+/* Input Fields */
+.registration-form input {
+  padding: 14px; /* Increase padding for inputs */
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+/* Submit Button */
+.registration-form button {
+  background-color: #4caf50;
+  color: white;
+  padding: 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.registration-form button:hover {
+  background-color: #45a049;
+}
