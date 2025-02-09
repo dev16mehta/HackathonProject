@@ -14,7 +14,7 @@ const StarterPage = () => {
     if (type === "new") {
       navigate("/tracker");
     } else if (type === "existing") {
-      navigate("/intro");
+      navigate("/register");
     }
   };
 

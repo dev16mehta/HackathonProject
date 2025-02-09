@@ -1,18 +1,18 @@
-import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import StarterPage from "./StarterPage";
-import CarbonFootprintTracker from "./CarbonFootprintTracker";
+import StarterPage from "./StarterPage.jsx";
+import CarbonFootprintTracker from "./CarbonFootprintTracker.jsx";
+import RegistrationPage from "./RegistrationPage.jsx";
 
-const App = () => {
+function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<StarterPage />} />
+        <Route path="/register" element={<RegistrationPage />} />
         <Route path="/tracker" element={<CarbonFootprintTracker />} />
-        <Route path="/intro" element={<div>Intro / Registration Page (To Be Built)</div>} />
       </Routes>
     </Router>
   );
-};
+}
 
 export default App;
